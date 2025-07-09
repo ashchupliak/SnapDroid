@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Visual Testing Framework</string>
+    <string name="visual_testing_demo">Visual Testing Demo</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="primary_action">Primary Action</string>
+    <string name="secondary_action">Secondary</string>
+    <string name="enable_notifications">Enable notifications</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="status_information">Status Information</string>
+    <string name="light_theme_support">✓ Light theme support</string>
+    <string name="dark_theme_support">✓ Dark theme support</string>
+    <string name="rtl_layout_support">✓ RTL layout support</string>
+    <string name="font_scales_support">✓ Multiple font scales</string>
+    <string name="device_sizes_support">✓ Various device sizes</string>
+    <string name="screenshot_comparison">✓ Screenshot comparison</string>
+</resources> 
