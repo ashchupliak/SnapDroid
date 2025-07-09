@@ -1,314 +1,199 @@
-# Android Visual Testing Framework with RTL Support
+# 📱 SnapDroid - Android Visual Testing Made Simple
 
-A comprehensive Android visual testing framework that provides automated screenshot testing with support for multiple themes, font scales, RTL layouts, device sizes, and orientations.
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/ashchupliak/SnapDroid)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Android](https://img.shields.io/badge/Android-5.0%2B-green)](https://developer.android.com)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-purple)](https://kotlinlang.org)
 
-## Features
+> 🚀 A powerful Android visual testing library that makes screenshot testing a breeze! Built with ❤️ for Android developers who care about pixel-perfect UIs.
 
-### 🎨 **Theme Support**
-- Light theme testing
-- Dark theme testing
-- Automatic theme switching
+## ✨ What is SnapDroid?
 
-### 📱 **Font Scale Support**
-- Default font scale (1.0x)
-- Larger font scale (1.3x)
-- Largest font scale (1.5x)
+SnapDroid is your go-to solution for comprehensive Android visual testing. Whether you're building apps for global markets with RTL support, testing across multiple themes, or ensuring your UI looks perfect on every device - SnapDroid has got you covered! 
 
-### 🌐 **RTL Layout Support**
-- Left-to-Right (LTR) layout testing
-- Right-to-Left (RTL) layout testing
-- Automatic layout direction switching
+### 🎯 Key Features
 
-### 📏 **Device Size Support**
-- Phone Small (320x568)
-- Phone Medium (360x640)
-- Phone Large (411x823)
-- Tablet Small (600x960)
-- Tablet Large (800x1280)
+- 🌍 **RTL Support**: Full right-to-left language testing
+- 🎨 **Multiple Themes**: Light, dark, and custom theme testing
+- 📏 **Font Scaling**: Test with different font sizes and accessibility options
+- 📱 **Device Variations**: From phones to tablets, all screen sizes covered
+- 🔄 **Orientation Testing**: Portrait and landscape modes
+- ⚡ **Easy Integration**: Simple setup with Gradle
+- 🔧 **Parameterized Testing**: Run hundreds of test combinations effortlessly
 
-### 🔄 **Orientation Support**
-- Portrait orientation
-- Landscape orientation
+## 🚀 Quick Start
 
-### 🛠️ **Testing Capabilities**
-- Fragment screenshot testing
-- Activity screenshot testing
-- View screenshot testing
-- Parameterized testing with TestParameterInjector
-- Comprehensive test scenarios
+### Installation
 
-## Architecture
-
-The framework consists of two main modules:
-
-1. **visual-testing-library** - Core framework library
-2. **app** - Demo application showcasing the framework
-
-### Core Components
-
-#### `BaseVisualTest`
-Base class for visual testing with comprehensive configuration support.
-
-#### `ParameterizedVisualTest`
-Parameterized testing class using TestParameterInjector for automatic parameter injection.
-
-#### `VisualTestParameters`
-Enums for different test parameters:
-- `ColorScheme`
-- `FontScale`
-- `ScreenDirection`
-- `DeviceOrientation`
-- `DeviceSize`
-
-## Installation
-
-### Prerequisites
-- Android Studio Arctic Fox (2020.3.1) or later
-- Android SDK 21 or higher
-- Gradle 7.0 or higher
-
-### Setup
-
-1. Clone the repository:
-```bash
-git clone https://github.com/your-username/android-visual-testing-framework.git
-```
-
-2. Open the project in Android Studio
-
-3. Build the project:
-```bash
-./gradlew build
-```
-
-## Usage
-
-### Basic Usage
-
-Create a test class extending `BaseVisualTest`:
-
-```kotlin
-class MyActivityVisualTest : BaseVisualTest() {
-    
-    @Test
-    fun testActivityScreenshot() {
-        val scenario = ActivityScenario.launch(MyActivity::class.java)
-        
-        compareScreenshot(
-            scenario = scenario,
-            name = "my_activity_basic",
-            colorScheme = ColorScheme.LIGHT,
-            fontScale = FontScale.DEFAULT
-        )
-    }
-}
-```
-
-### Parameterized Testing
-
-Create a test class extending `ParameterizedVisualTest`:
-
-```kotlin
-@RunWith(TestParameterInjector::class)
-class MyParameterizedVisualTest : ParameterizedVisualTest() {
-    
-    @Test
-    fun testWithParameters(
-        @TestParameter colorScheme: ColorScheme,
-        @TestParameter fontScale: FontScale
-    ) {
-        val scenario = ActivityScenario.launch(MyActivity::class.java)
-        
-        compareParameterizedScreenshot(
-            scenario = scenario,
-            name = "my_activity_parameterized",
-            colorScheme = colorScheme,
-            fontScale = fontScale
-        )
-    }
-}
-```
-
-### RTL Testing
-
-Test RTL layout support:
-
-```kotlin
-@Test
-fun testRTLLayout() {
-    val scenario = ActivityScenario.launch(MyActivity::class.java)
-    
-    compareScreenshot(
-        scenario = scenario,
-        name = "my_activity_rtl",
-        colorScheme = ColorScheme.LIGHT,
-        fontScale = FontScale.DEFAULT,
-        screenDirection = ScreenDirection.RTL
-    )
-}
-```
-
-### Comprehensive Testing
-
-Test multiple parameters together:
-
-```kotlin
-@Test
-fun testComprehensiveScenario() {
-    val scenario = ActivityScenario.launch(MyActivity::class.java)
-    
-    compareScreenshot(
-        scenario = scenario,
-        name = "my_activity_comprehensive",
-        colorScheme = ColorScheme.DARK,
-        fontScale = FontScale.LARGER,
-        screenDirection = ScreenDirection.RTL,
-        deviceOrientation = DeviceOrientation.LANDSCAPE,
-        deviceSize = DeviceSize.TABLET_SMALL
-    )
-}
-```
-
-## Running Tests
-
-### Execute Visual Tests
-
-```bash
-./gradlew executeScreenshotTests
-```
-
-### Verify Screenshots
-
-```bash
-./gradlew verifyScreenshots
-```
-
-### Record New Screenshots
-
-```bash
-./gradlew recordScreenshots
-```
-
-## Screenshot Organization
-
-Screenshots are organized in the following structure:
-
-```
-app/screenshots/debug/
-├── MainActivityVisualTest_testMainActivityBasicThemes_main_activity_basic_light.png
-├── MainActivityVisualTest_testMainActivityBasicThemes_main_activity_basic_dark.png
-├── MainActivityVisualTest_testMainActivityRTLSupport_main_activity_rtl_light_rtlScreenDirection.png
-├── MainActivityVisualTest_testMainActivityRTLSupport_main_activity_rtl_dark_rtlScreenDirection.png
-└── ...
-```
-
-## Configuration
-
-### Gradle Configuration
-
-The framework uses the Shot library for screenshot testing. Add the following to your `build.gradle`:
+Add to your `build.gradle` (Module: app):
 
 ```gradle
-plugins {
-    id 'shot'
-}
-
 dependencies {
-    androidTestImplementation 'com.karumi:shot:6.1.0'
+    implementation project(':visual-testing-library')
+    
+    // For testing
     androidTestImplementation 'com.karumi:shot-android:6.1.0'
-    androidTestImplementation 'com.google.testing.junit.testparameterinjector:test-parameter-injector:1.5'
+    androidTestImplementation 'com.google.testparameterinjector:test-parameter-injector:1.13'
 }
 ```
 
-### Android Manifest Configuration
+### 📸 Your First Snapshot Test
 
-Ensure RTL support is enabled in your `AndroidManifest.xml`:
-
-```xml
-<application
-    android:supportsRtl="true"
-    ... >
-</application>
+```kotlin
+class MyActivityTest : ParameterizedVisualTest() {
+    
+    @Test
+    fun testMyActivity_AllVariations() {
+        val activity = MyActivity()
+        
+        // Test with different configurations
+        compareScreenshot(activity, "my_activity")
+    }
+    
+    @Test
+    fun testMyActivity_RTL() {
+        val activity = MyActivity()
+        
+        // Test RTL layout
+        compareScreenshot(
+            activity, 
+            "my_activity_rtl",
+            ScreenDirection.RTL
+        )
+    }
+}
 ```
 
-## Advanced Features
+## 🛠️ Advanced Usage
 
-### Custom Screenshot Naming
+### Custom Test Configurations
 
-The framework automatically generates screenshot names based on test parameters:
+```kotlin
+// Test with specific parameters
+@Test
+fun testLoginScreen_DarkTheme_LargeFont() {
+    val activity = LoginActivity()
+    
+    compareScreenshot(
+        activity,
+        "login_dark_large",
+        colorScheme = ColorScheme.DARK,
+        fontScale = FontScale.LARGER
+    )
+}
 
+// Test across multiple devices
+@Test
+fun testDashboard_AllDevices() {
+    val activity = DashboardActivity()
+    
+    DeviceSize.values().forEach { device ->
+        compareScreenshot(
+            activity,
+            "dashboard_${device.name.lowercase()}",
+            deviceSize = device
+        )
+    }
+}
 ```
-{test_name}_{color_scheme}_{font_scale}_{screen_direction}_{device_orientation}_{device_size}
+
+### 🎨 Available Parameters
+
+| Parameter | Options | Description |
+|-----------|---------|-------------|
+| `ColorScheme` | `LIGHT`, `DARK` | Theme variations |
+| `FontScale` | `DEFAULT`, `LARGER`, `LARGEST` | Font size testing |
+| `ScreenDirection` | `LTR`, `RTL` | Language direction |
+| `DeviceOrientation` | `PORTRAIT`, `LANDSCAPE` | Screen orientation |
+| `DeviceSize` | `PHONE_SMALL` to `TABLET_LARGE` | Device variations |
+
+## 📊 Test Results
+
+SnapDroid generates detailed screenshot comparisons and stores them in:
+```
+/screenshots/
+├── debug/
+│   ├── my_activity_light_ltr_phone.png
+│   ├── my_activity_dark_rtl_tablet.png
+│   └── ...
 ```
 
-### Test Parameter Combinations
+## 🔧 Configuration
 
-The framework supports testing various parameter combinations:
+### Custom Base Test Class
 
-- **Basic**: ColorScheme + FontScale
-- **RTL**: ColorScheme + FontScale + ScreenDirection
-- **Device**: ColorScheme + FontScale + DeviceSize
-- **Comprehensive**: All parameters
+```kotlin
+abstract class MyBaseVisualTest : BaseVisualTest() {
+    
+    override fun setUp() {
+        super.setUp()
+        // Your custom setup
+    }
+    
+    override fun getDefaultWaitTime(): Long = 2000L
+    
+    override fun getDefaultTolerance(): Double = 0.01
+}
+```
 
-## Best Practices
+### 📱 Demo App
 
-1. **Test Naming**: Use descriptive test names that indicate the scenario being tested
-2. **Parameter Coverage**: Test both LTR and RTL layouts for international support
-3. **Font Scale Testing**: Always test with at least default and larger font scales
-4. **Device Coverage**: Test on different device sizes for responsive design
-5. **Theme Testing**: Test both light and dark themes
+The project includes a comprehensive demo app showcasing:
+- ✅ Material Design components
+- ✅ Form elements with validation
+- ✅ RTL-aware layouts
+- ✅ Theme switching
+- ✅ Accessibility features
 
-## Demo Application
-
-The framework includes a demo application showcasing:
-
-- Material Design components
-- RTL layout support
-- Theme switching
-- Font scale adaptation
-- Responsive design
-
-Run the demo app to see the framework in action:
-
+Run the demo:
 ```bash
 ./gradlew app:installDebug
 ```
 
-## Troubleshooting
+## 🧪 Running Tests
 
-### Common Issues
+```bash
+# Run all visual tests
+./gradlew app:connectedAndroidTest
 
-1. **Screenshot Mismatch**: Ensure consistent test environment and device configuration
-2. **RTL Layout Issues**: Check that `android:supportsRtl="true"` is set in manifest
-3. **Font Scale Problems**: Verify that layouts handle different font scales appropriately
-4. **Theme Issues**: Ensure proper theme configuration in styles.xml
+# Run specific test class
+./gradlew app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=com.snapdroid.MainActivityTest
 
-### Debug Tips
+# Generate screenshots
+./gradlew app:executeScreenshotTests
+```
 
-1. Use specific device emulators for consistent results
-2. Record screenshots initially to establish baseline
-3. Use descriptive test names for easier debugging
-4. Check Shot library logs for detailed error information
+## 🤝 Contributing
 
-## Contributing
+We love contributions! 💝 
 
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Submit a pull request
+1. 🍴 Fork the repository
+2. 🌟 Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. 💾 Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. 📤 Push to the branch (`git push origin feature/amazing-feature`)
+5. 🔄 Open a Pull Request
 
-## License
+## 📄 License
 
-MIT License - see LICENSE file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
+## 🙏 Acknowledgments
 
-For issues and questions:
-- Create an issue on GitHub
-- Check the documentation
-- Review the demo application for examples
+- 📸 [Karumi Shot](https://github.com/Karumi/Shot) - The amazing screenshot testing library
+- 🔧 [TestParameterInjector](https://github.com/google/TestParameterInjector) - For parameterized testing
+- 🎨 [Material Design](https://material.io/) - For beautiful UI components
+
+## 📞 Support
+
+Having issues? 🐛 Found a bug? 💡 Have a feature request?
+
+- 📋 [Open an issue](https://github.com/ashchupliak/SnapDroid/issues)
+- 💬 [Start a discussion](https://github.com/ashchupliak/SnapDroid/discussions)
+- 📧 Contact: [your-email@example.com](mailto:your-email@example.com)
 
 ---
 
-**Happy Visual Testing! 📸** 
+<p align="center">
+  Made with ❤️ for the Android community<br>
+  <em>Happy Testing! 🎉</em>
+</p> 

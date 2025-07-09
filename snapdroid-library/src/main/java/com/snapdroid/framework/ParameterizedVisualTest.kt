@@ -1,4 +1,4 @@
-package com.visualtesting.framework
+package com.snapdroid.framework
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

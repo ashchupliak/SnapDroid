@@ -1,4 +1,4 @@
-package com.visualtesting.framework
+package com.snapdroid.framework
 
 import android.app.Activity
 import android.content.Context

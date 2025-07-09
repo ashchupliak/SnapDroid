@@ -15,6 +15,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "android-visual-testing-framework"
+rootProject.name = "SnapDroid"
 include ':app'
-include ':visual-testing-library' 
+include ':snapdroid-library' 

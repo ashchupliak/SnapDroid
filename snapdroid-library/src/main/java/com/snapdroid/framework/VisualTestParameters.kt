@@ -1,4 +1,4 @@
-package com.visualtesting.framework
+package com.snapdroid.framework
 
 /**
  * Enum for color scheme variations in visual tests
